@@ -7,22 +7,22 @@ function Carousel() {
     {
       url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       text: "Vipingo Heights",
-      description: " Luxury two bedroom apartment starting from $200,000",
+      description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
       url: "https://images.unsplash.com/photo-1605276373954-0c4a0dac5b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       text: "Nyali Beach Apartments",
-      description: " Luxury two bedroom apartment starting from $200,000",
+      description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
       url: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
       text: "Diani Cottages",
-      description: " Luxury two bedroom apartment starting from $200,000",
+      description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
       url: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
       text: "Buxton Furnished Apartments",
-      description: " Luxury two bedroom apartment starting from $200,000",
+      description: " Luxury two bedroom apartments starting from $200,000",
     },
   ];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -61,15 +61,15 @@ function Carousel() {
             />
 
             {/* Overlay text */}
-            <div className="absolute bottom-0 left-0 right-0 py-2 px-4 bg-black bg-opacity-50 text-white shadow-md flex">
+            <div className="absolute bottom-0 left-0 right-0 py-2 px-4 bg-teal-500 bg-opacity-50 text-dark shadow-md flex">
               <div className="flex-start">
-                <strong className="text-bold ">{imageUrl.text}</strong>
+                <strong className="text-bold text-black">{imageUrl.text}</strong>
               </div>
               <div className="flex-1">
-                <strong className="text-sm ">{imageUrl.description} </strong>
+                <strong className="text-sm text-black">{imageUrl.description} </strong>
               </div>
               <div className="flex-end">
-                <Link className="text-sm inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 mr-2 lg:mt-0 ">
+                <Link className="text-sm inline-block  px-4 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0 ">
                   <strong>View</strong>
                 </Link>
               </div>
@@ -80,7 +80,7 @@ function Carousel() {
       {/* Slider controls */}
       <button
   type="button"
-  className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none "
+  className="absolute top-0 left-0 z-30 flex items-center justify-center h-80 px-4 cursor-pointer group focus:outline-none "
   data-carousel-prev
   onClick={prevSlide}
 >
@@ -95,7 +95,7 @@ function Carousel() {
 
       <button
         type="button"
-        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        className="absolute top-0 right-0 z-30 flex items-center justify-center h-80 px-4 cursor-pointer group focus:outline-none"
         data-carousel-next
         onClick={nextSlide}
       >

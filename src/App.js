@@ -3,6 +3,9 @@ import './App.css';
 import Homepage from "./Components/Homepage"
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
+import AddProperties from './Components/AddProperties';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
   return (
@@ -10,9 +13,9 @@ function App() {
   <Navbar/>
   <Routes>
     <Route path='/home' element={<Homepage/>} />
-    <Route/>
-    <Route/>
-    <Route/>
+    <Route path='/addproperties' element={<AddProperties/>}/>
+    <Route path='/login' element={<Login/>}/>
+    <Route path='/signup' element={<Signup/>}/>
   </Routes>
 
     
