@@ -25,14 +25,14 @@ function Navbar() {
         </div>
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
-            <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-              Buy
+            <Link to="/" className="block mt-4 lg:inline-block lg:mt-0 text-teal-300 hover:text-white mr-4">
+             <strong>Buy</strong> 
             </Link>
-            <Link href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-              Rent
+            <Link href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-300 hover:text-white mr-4">
+            <strong>Rent</strong> 
             </Link>
-            <Link href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-              Sell
+            <Link href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-300 hover:text-white">
+            <strong>Sell</strong> 
             </Link>
           </div>
           <div>
