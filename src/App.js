@@ -8,6 +8,7 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Admin from './Components/Admin';
 import UserProfile from './Components/UserProfile';
+import Navigation from './Components/Navigation';
 
 function App() {
 
@@ -25,8 +26,9 @@ function App() {
   return (
     <div className="App">
      {!isAuthenticated() && <Navbar />}
+     {isAuthenticated() && <Navigation />}
   <Routes>
-    <Route path='/home' element={<Homepage/>} />
+    <Route path='/' element={<Homepage/>} />
     <Route path='/addproperties' element={<AddProperties/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
