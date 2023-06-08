@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [accessToken, setAccessToken] = useState(null);
   const [errors, setErrors] = useState([]);
@@ -22,13 +22,16 @@ function Login() {
 
   const handleLogin = () => {
     try {
-      const decodedToken = JSON.parse(atob(accessToken.split(".")[1]));
-      const userRole = decodedToken.role;
-      localStorage.setItem("userRole", userRole);
-      if (userRole === "user") {
-        window.location.href = "/profile";
-      } else if (userRole === "admin") {
-        window.location.href = "/admin"
+      const storedAccessToken = localStorage.getItem("accessToken");
+      if (storedAccessToken && storedAccessToken !== "undefined") {
+        const decodedToken = JSON.parse(atob(storedAccessToken.split(".")[1]));
+        const userRole = decodedToken.role;
+        localStorage.setItem("userRole", userRole);
+        if (userRole === "house_seeker") {
+          window.location.href = "/profile";
+        } else if (userRole === "admin") {
+          window.location.href = "/admin";
+        }
       }
     } catch (error) {
       setErrors([error.message]);
@@ -39,11 +42,11 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:3000/login', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:3000/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -51,10 +54,10 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('jwt', data.jwt);
-        window.location.href = '/home';
+        localStorage.setItem("jwt", data.jwt);
+        window.location.href = "/home";
         const accessToken = data.accessToken;
-        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem("accessToken", accessToken);
         setAccessToken(accessToken);
       } else {
         setErrors(data.errors);
@@ -63,7 +66,6 @@ function Login() {
       setErrors([error.message]);
     }
   };
-
 
   useEffect(() => {
     if (accessToken) {
@@ -80,7 +82,11 @@ function Login() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-dark">
                 Sign in to your account
               </h1>
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4 md:space-y-6"
+                action="#"
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -150,7 +156,7 @@ function Login() {
                   Sign in
                 </button>
                 <p className="text-sm font-light text-dark-500 dark:text-dark-400">
-                  Don’t have an account yet?{' '}
+                  Don’t have an account yet?{" "}
                   <Link
                     to="/signup"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"

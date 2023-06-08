@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "tailwindcss/tailwind.css";
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
     password_confirmation: "",
-    role: "user",
+    role: "house_seeker", // Set the default role value to "house_seeker"
   });
-  const [user, setUser] = useState("");
+  const [User, setUser] = useState("");
   const [errors, setErrors] = useState([]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: name === "role" ? value : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -32,8 +38,10 @@ const Signup = () => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("jwt", data.jwt);
-        setUser(data.user);
+        const { jwt, user, role } = data;
+        localStorage.setItem("jwt", jwt);
+        setUser(user);
+        localStorage.setItem("userRole", role);
         window.location.href = "/login";
       } else {
         setErrors(data.errors);
@@ -41,14 +49,12 @@ const Signup = () => {
     } catch (error) {
       setErrors([error.message]);
     }
-
-    console.log(formData); // Replace with your actual API call
   };
 
   return (
-    <div className="max-w-sm mx-auto rounded-lg  shadow dark:border dark:border-gray-700  my-2 p-4 ">
-      <form onSubmit={handleSubmit} className=" space-y-4 md:space-y-6">
-        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-black">
+    <div className="max-w-sm mx-auto rounded-lg shadow dark:border dark:border-gray-700 my-2 p-4">
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-black">
           Create an account
         </h1>
         <div className="mb-4">
@@ -118,22 +124,19 @@ const Signup = () => {
           />
         </div>
 
-        <div className="mb-4 hidden">
-          <label htmlFor="role" className="block mb-2 font-bold">
+        <div className="mb-4">
+          <label htmlFor="role" className="block mb-2 font-bold hidden">
             Role
           </label>
           <select
             id="role"
             name="role"
-            value="user"
-            //  onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
+            onChange={handleChange}
+            className="w-full px-3 py-2 border hidden border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
             required
           >
+            <option value="house_seeker">User</option>
             <option value="admin">Admin</option>
-            <option value="user" selected>
-              User
-            </option>
           </select>
         </div>
 
@@ -143,11 +146,11 @@ const Signup = () => {
         >
           Register
         </button>
-        <p class="text-sm font-light text-dark-500 dark:text-black-400">
+        <p className="text-sm font-light text-dark-500 dark:text-black-400">
           Already have an account?{" "}
           <Link
             to="/login"
-            class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+            className="font-medium text-primary-600 hover:underline dark:text-primary-500"
           >
             Login here
           </Link>

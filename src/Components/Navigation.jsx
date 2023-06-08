@@ -8,6 +8,13 @@ function Navigation() {
     setShowList(!showList);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userRole");
+    window.location.href = "/login";
+    
+  };
+
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-teal-500 sm-px-4">
@@ -72,6 +79,7 @@ function Navigation() {
 
                 <a
                   href="#"
+                  onClick={handleLogout}
                   className="block px-4 py-2 text-sm text-black-800 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-black-200 dark:hover:text-white"
                 >
                   Sign out
