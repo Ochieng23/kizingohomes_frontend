@@ -18,14 +18,11 @@ function PropertyCarousel({ images }) {
   if (!images || images.length === 0) {
     return <div>No images available</div>;
   }
+
   return (
-    <div
-      id="animation-carousel"
-      className="relative w-full"
-      data-carousel="static"
-    >
+    <div className="relative">
       {/* Carousel wrapper */}
-      <div className="relative h-56 overflow-hidden rounded-none md:h-96">
+      <div className="relative h-56 md:h-96">
         {/* Carousel items */}
         {images.map((imageUrl, index) => (
           <div
@@ -37,28 +34,28 @@ function PropertyCarousel({ images }) {
           >
             <img
               src={imageUrl}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-105 object-cover"
+              className="absolute w-full  object-cover object-top rounded-t-lg  h-full object-cover object-top"
               alt="..."
             />
 
             {/* Overlay text */}
-            <div className="absolute bottom-0 left-0 right-0 py-2 px-4 bg-teal-500 bg-opacity-50 text-dark shadow-md flex">
-              {/* <div className="flex-start">
+            {/* <div className="absolute bottom-0 left-0 right-0 py-2 px-4 bg-teal-500 bg-opacity-50 text-dark shadow-md flex"> */}
+            {/* <div className="flex-start">
                 <strong className="text-bold text-black">
                   {imageUrl.text}
                 </strong>
               </div> */}
-              {/* <div className="flex-1">
+            {/* <div className="flex-1">
                 <strong className="text-sm text-black">
                   {imageUrl.description}{" "}
                 </strong>
               </div> */}
-              {/* <div className="flex-end">
+            {/* <div className="flex-end">
                 <Link className="text-sm inline-block  px-4 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0 ">
                   <strong>View</strong>
                 </Link>
               </div> */}
-            </div>
+            {/* </div> */}
           </div>
         ))}
       </div>
