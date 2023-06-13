@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Carousel() {
   const images = [
     {
-      url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      url: "https://images.unsplash.com/photo-1646844371945-808c9d3191a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80",
       text: "Vipingo Heights",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
@@ -56,17 +56,21 @@ function Carousel() {
           >
             <img
               src={imageUrl.url}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-105 object-cover"
+              className="filter  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
               alt="..."
             />
 
             {/* Overlay text */}
             <div className="absolute bottom-0 left-0 right-0 py-2 px-4 bg-teal-500 bg-opacity-50 text-dark shadow-md flex">
               <div className="flex-start">
-                <strong className="text-bold text-black">{imageUrl.text}</strong>
+                <strong className="text-bold text-black">
+                  {imageUrl.text}
+                </strong>
               </div>
               <div className="flex-1">
-                <strong className="text-sm text-black">{imageUrl.description} </strong>
+                <strong className="text-sm text-black">
+                  {imageUrl.description}{" "}
+                </strong>
               </div>
               <div className="flex-end">
                 <Link className="text-sm inline-block  px-4 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0 ">
@@ -79,19 +83,32 @@ function Carousel() {
       </div>
       {/* Slider controls */}
       <button
-  type="button"
-  className="absolute top-0 left-0 z-30 flex items-center justify-center h-80 px-4 cursor-pointer group focus:outline-none "
-  data-carousel-prev
-  onClick={prevSlide}
->
-
-<span class="inline-flex items-center justify-center w-8 h-8 rounded-sm sm:w-10 sm:h-10 bg-white/30 dark:bg-black-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-black-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            <span class="sr-only">Previous</span>
+        type="button"
+        className="absolute top-0 left-0 z-30 flex items-center justify-center h-80 px-4 cursor-pointer group focus:outline-none "
+        data-carousel-prev
+        onClick={prevSlide}
+      >
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-sm sm:w-10 sm:h-10 bg-white/30 dark:bg-black-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-black-800"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+          <span class="sr-only">Previous</span>
         </span>
 
-  {/* Button content */}
-</button>
+        {/* Button content */}
+      </button>
 
       <button
         type="button"
@@ -100,8 +117,22 @@ function Carousel() {
         onClick={nextSlide}
       >
         <span class="inline-flex items-center justify-center w-8 h-8 rounded-sm sm:w-10 sm:h-10 bg-white/30 dark:bg-black-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-black-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            <span class="sr-only">Next</span>
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-black-800"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+          <span class="sr-only">Next</span>
         </span>
         {/* Next button SVG */}
       </button>

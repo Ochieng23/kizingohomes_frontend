@@ -16,7 +16,7 @@ function Navigation() {
 
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-teal-500 sm-px-4">
+      <nav className="bg-white border-gray-200 dark:bg-teal-600 sm-px-4">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to="/"
@@ -32,8 +32,8 @@ function Navigation() {
               <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
             </svg>
             <span className="font-semibold text-xl tracking-tight">
-              <strong>K</strong>izingo
-              <strong>H</strong>omes
+              <strong>S</strong>alranck
+              <strong>P</strong>roperties
             </span>
           </Link>
           <div className=" flex items-end md:order-4">
@@ -115,7 +115,7 @@ function Navigation() {
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-teal-100 rounded-lg bg-teal-800 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white md:dark:bg-teal-500">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-teal-100 rounded-lg bg-teal-600 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white md:dark:bg-teal-600">
               <li>
                 <Link
                   to="/"
