@@ -85,6 +85,7 @@ const AddProperties = () => {
 
         if (response.ok) {
           console.log("Property created successfully");
+          // Reset the property state and images
           setProperty({
             name: "",
             location: "",

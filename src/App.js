@@ -9,7 +9,7 @@ import Signup from './Components/Signup';
 import Admin from './Components/Admin';
 import UserProfile from './Components/UserProfile';
 import Navigation from './Components/Navigation';
-
+import PropertiesList from './Components/PropertiesList'
 function App() {
 
   const isAuthenticated = () => {
@@ -34,6 +34,7 @@ function App() {
     <Route path='/signup' element={<Signup/>}/>
     <Route path='/admin' element={<Admin/>}/>
     <Route path='/profile' element={<UserProfile/>}/>
+    <Route path='/properties' element={<PropertiesList/>}/>
   </Routes>
 
     
