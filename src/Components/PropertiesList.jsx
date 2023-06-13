@@ -39,7 +39,7 @@ const PropertiesList = ({ id }) => {
 
   return (
     <div className="mx-7 my-3 mt-4">
-      {propertyGroups.reverse().map((group, index) => (
+      {propertyGroups.map((group, index) => (
         <div key={index} className="flex flex-grow space-x-4 mt-4">
           {group.map((property) => (
             <div
