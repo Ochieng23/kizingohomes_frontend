@@ -50,25 +50,40 @@ const PropertiesList = ({ id }) => {
               <div className="px-2 pb-3">
                 <a href="#">
                   <h5
-                    className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white mt-0"
-                    style={{ marginLeft: "3px" }}
+                    className=" font-semibold tracking-tight text-gray-900 dark:text-white mt-0 whitespace-no-wrap"
+                    style={{ marginRight: "70%", whiteSpace: "nowrap" }}
                   >
                     {property.name}
                   </h5>
                 </a>
+
                 <div className="flex items-center mt-2.5 mb-5">
-                  <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                  <span
+                    className="bg-teal-600 text-white font-semibold  px-2.5 py-0.5 rounded dark:bg-white-200 dark:text-white-800 "
+                    style={{ marginRight: "70%", whiteSpace: "nowrap" }}
+                  >
                     {truncateDescription(property.description, 20)}
                   </span>
                 </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                <div className="flex items-center mt-2.5 mb-5">
+                  <a href="#">
+                    <h5 className="font-semibold tracking-tight text-gray-900 dark:text-white mt-0 whitespace-no-wrap">
+                      {property.location}
+                    </h5>
+                  </a>
+                </div>
+                <div
+                  className="border border-black-300"
+                  style={{ height: "1px", flex: "1" }}
+                ></div>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xl font-bold text-gray-900 dark:text-white px-3 py-2">
                     ${property.price}
                   </span>
+
                   <a
                     href="#"
-                    className="text-sm inline-block px-4 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0"
+                    className="text-sm inline-block px-3 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0"
                   >
                     <strong>Know More</strong>
                   </a>

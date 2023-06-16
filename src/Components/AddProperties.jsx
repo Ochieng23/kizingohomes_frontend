@@ -21,47 +21,37 @@ const AddProperties = () => {
     setImages(acceptedFiles);
   };
 
-  const uploadImages = async () => {
-    const uploaders = images.map((file) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", cloudinaryUploadPreset);
-      formData.append("api_key", cloudinaryCloudName);
-
-      return axios
-        .post(
-          `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        )
-        .then((response) => {
-          const data = response.data;
-          const fileURL = data.secure_url;
-          return fileURL;
-        });
-    });
-
-    try {
-      const imageUrls = await axios.all(uploaders);
-      setProperty((prevProperty) => ({
-        ...prevProperty,
-        media: imageUrls,
-      }));
-
-      console.log("Upload successful:", imageUrls);
-      alert("Upload successful!");
-    } catch (error) {
-      console.error("Error uploading images:", error);
-    }
-  };
-
-  const handleSubmit = async (e) => {
+  const addProperty = async (e) => {
     e.preventDefault();
 
     try {
-      await uploadImages();
+      const uploaders = images.map((file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", cloudinaryUploadPreset);
+        formData.append("api_key", cloudinaryCloudName);
+
+        return axios
+          .post(
+            `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,
+            formData,
+            {
+              headers: { "Content-Type": "multipart/form-data" },
+            }
+          )
+          .then((response) => {
+            const data = response.data;
+            const fileURL = data.secure_url;
+            return fileURL;
+          });
+      });
+
+      const imageUrls = await axios.all(uploaders);
+
+      const updatedProperty = {
+        ...property,
+        media: imageUrls,
+      };
 
       const accessToken = localStorage.getItem("accessToken");
 
@@ -80,22 +70,14 @@ const AddProperties = () => {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(property),
+          body: JSON.stringify(updatedProperty),
         });
 
         if (response.ok) {
           console.log("Property created successfully");
           // Reset the property state and images
-          setProperty({
-            name: "",
-            location: "",
-            description: "",
-            listing_type: "",
-            sqft: "",
-            price: "",
-            media: [],
-          });
-          setImages([]);
+          window.location.href = "/";
+          e.target.reset();
         } else {
           console.error("Error creating property");
         }
@@ -114,11 +96,10 @@ const AddProperties = () => {
       [name]: value,
     }));
   };
-
   return (
     <form
-      onSubmit={handleSubmit}
-      className="max-w-sm mx-auto border border-teal-500 my-2 p-4"
+      onSubmit={addProperty}
+      className="max-w-sm mx-auto border border-teal-600 my-2 p-4 rounded-lg"
     >
       <div className="mb-4">
         <label htmlFor="name" className="block mb-2 font-bold">

@@ -10,6 +10,7 @@ import Admin from './Components/Admin';
 import UserProfile from './Components/UserProfile';
 import Navigation from './Components/Navigation';
 import PropertiesList from './Components/PropertiesList'
+import AddCs from './Components/AddCs';
 function App() {
 
   const isAuthenticated = () => {
@@ -35,6 +36,7 @@ function App() {
     <Route path='/admin' element={<Admin/>}/>
     <Route path='/profile' element={<UserProfile/>}/>
     <Route path='/properties' element={<PropertiesList/>}/>
+    <Route path='/addsite' element={<AddCs/>}/>
   </Routes>
 
     

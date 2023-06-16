@@ -2,6 +2,7 @@ import React from 'react'
 import Carousel from './Carousel'
 import HomepageText from './HomepageText'
 import PropertiesList from './PropertiesList'
+import Footer from './Footer'
 
 function Homepage() {
   return (
@@ -9,7 +10,7 @@ function Homepage() {
       <Carousel/>
       <HomepageText/>
       <PropertiesList/>
-     
+     <Footer/>
 
     </div>
   )
