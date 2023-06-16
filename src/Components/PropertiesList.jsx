@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PropertyCarousel from "./PropertyCarousel";
+import MyContext from "./MyContext";
 
-const PropertiesList = ({ id }) => {
+const PropertiesList = () => {
   const [properties, setProperties] = useState(null);
 
   useEffect(() => {
@@ -9,13 +11,11 @@ const PropertiesList = ({ id }) => {
       .then((response) => response.json())
       .then((data) => setProperties(data))
       .catch((error) => console.log(error));
-  }, [id]);
+  }, []);
 
   if (!properties) {
     return <div>Loading...</div>;
   }
-
-  console.log(properties);
 
   const groupProperties = (array, groupSize) => {
     const groups = [];
@@ -39,60 +39,59 @@ const PropertiesList = ({ id }) => {
 
   return (
     <div className="mx-7 my-3 mt-4">
-      {propertyGroups.map((group, index) => (
-        <div key={index} className="flex flex-grow space-x-4 mt-4">
-          {group.map((property) => (
-            <div
-              key={property.id}
-              className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg dark:bg-teal-600 dark:border-gray-700 overflow-hidden shadow-lg"
-            >
-              <PropertyCarousel images={property.media} />
-              <div className="px-2 pb-3">
-                <a href="#">
-                  <h5
-                    className=" font-semibold tracking-tight text-gray-900 dark:text-white mt-0 whitespace-no-wrap"
-                    style={{ marginRight: "70%", whiteSpace: "nowrap" }}
-                  >
-                    {property.name}
-                  </h5>
-                </a>
-
-                <div className="flex items-center mt-2.5 mb-5">
-                  <span
-                    className="bg-teal-600 text-white font-semibold  px-2.5 py-0.5 rounded dark:bg-white-200 dark:text-white-800 "
-                    style={{ marginRight: "70%", whiteSpace: "nowrap" }}
-                  >
-                    {truncateDescription(property.description, 20)}
-                  </span>
-                </div>
-                <div className="flex items-center mt-2.5 mb-5">
-                  <a href="#">
-                    <h5 className="font-semibold tracking-tight text-gray-900 dark:text-white mt-0 whitespace-no-wrap">
-                      {property.location}
+      <MyContext.Provider value={properties}>
+        {propertyGroups.map((group, index) => (
+          <div key={index} className="flex flex-grow space-x-4 mt-4">
+            {group.map((property) => (
+              <div
+                key={property.id}
+                className="w-full h-auto max-w-sm bg-white border border-gray-200 rounded-lg dark:bg-teal-600 dark:border-gray-700 overflow-hidden shadow-lg"
+              >
+                <PropertyCarousel images={property.media} />
+                <div className="px-2 pb-3">
+                  <Link to={`/listing/${property.id}`}>
+                    <h5 className="font-semibold tracking-tight text-gray-900 dark:text-black mt-0 whitespace-no-wrap">
+                      {property.name}
                     </h5>
-                  </a>
-                </div>
-                <div
-                  className="border border-black-300"
-                  style={{ height: "1px", flex: "1" }}
-                ></div>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-xl font-bold text-gray-900 dark:text-white px-3 py-2">
-                    ${property.price}
-                  </span>
+                  </Link>
 
-                  <a
-                    href="#"
-                    className="text-sm inline-block px-3 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0"
-                  >
-                    <strong>Know More</strong>
-                  </a>
+                  <div className="flex items-center mt-2.5 mb-5">
+                    <span
+                      className="bg-teal-600 text-white font-semibold  px-2.5 py-0.5 rounded dark:bg-white-200 dark:text-white-800 "
+                      style={{ marginRight: "70%", whiteSpace: "nowrap" }}
+                    >
+                      {truncateDescription(property.description, 20)}
+                    </span>
+                  </div>
+                  <div className="flex items-center mt-2.5 mb-5">
+                    <a href="#">
+                      <h5 className="font-semibold tracking-tight text-gray-900 dark:text-white mt-0 whitespace-no-wrap">
+                        {property.location}
+                      </h5>
+                    </a>
+                  </div>
+                  <div
+                    className="border border-black-300"
+                    style={{ height: "1px", flex: "1" }}
+                  ></div>
+                  <div className="flex items-center justify-between mt-2">
+                    <span className="text-xl font-bold text-gray-900 dark:text-black px-3 py-2">
+                      ${property.price}
+                    </span>
+
+                    <Link
+                      to={`/listing/${property.id}`}
+                      className="text-sm inline-block px-3 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0"
+                    >
+                      <strong>Know More</strong>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      ))}
+            ))}
+          </div>
+        ))}
+      </MyContext.Provider>
     </div>
   );
 };
