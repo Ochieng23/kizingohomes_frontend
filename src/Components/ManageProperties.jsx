@@ -97,17 +97,16 @@ function ManageProperties() {
 
       {showEditModal && (
         <div
-          className="fixed top-0 left-0 w-full h-full flex items-stretch justify-center bg-gray-800 bg-opacity-50 bg-white"
+          className="fixed top-0 left-0 w-full h-full flex items-stretch justify-center bg-gray-800 bg-opacity-50 "
           style={{
-            height:"",
+            height: "",
             overflowY: "auto",
-            
           }}
         >
-          <div className="bg-white rounded-lg p-3 bg-white  " style={{border:""}}>
+          <div className=" rounded-lg p-3   " style={{ border: "" }}>
             <EditPropertyList propertyId={selectedPropertyId} />
             <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-2"
               onClick={() => setShowEditModal(false)}
             >
               Cancel
