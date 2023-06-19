@@ -1,0 +1,10 @@
+.scroll-animation {
+    opacity: 0; /* Initially hide the div */
+    transform: translateY(20px); /* Move the div down */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Add smooth transition */
+  }
+  .scroll-animation.show {
+    opacity: 1; /* Show the div */
+    transform: translateY(0); /* Move the div back to its original position */
+  }
+  
