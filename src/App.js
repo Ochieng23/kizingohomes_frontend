@@ -12,6 +12,8 @@ import Navigation from './Components/Navigation';
 import PropertiesList from './Components/PropertiesList'
 import AddCs from './Components/AddCs';
 import IndividualListing from './Components/IndividualListing';
+import ManageProperties from './Components/ManageProperties';
+import EditPropertyList from './Components/EditPropertyList';
 function App() {
 
   const isAuthenticated = () => {
@@ -39,6 +41,9 @@ function App() {
     <Route path='/properties' element={<PropertiesList/>}/>
     <Route path='/addsite' element={<AddCs/>}/>
     <Route path="/listing/:id" element={<IndividualListing />} />
+    <Route path="/manageproperties" element={<ManageProperties />} />
+    <Route path="/editproperties" element={<EditPropertyList />} />
+
 
   </Routes>
 

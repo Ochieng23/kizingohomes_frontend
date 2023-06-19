@@ -64,21 +64,23 @@ const IndividualListing = () => {
           </div>
           <div className="bg-gray-200 h-100">
             <h5 className="text-2xl font-bold mb-4">Gallery</h5>
-            <div className="scroll-animation grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
-              {property.media.map((image) => (
-                <div key={image.id} className="">
-                  <img
-                    src={image}
-                    alt=""
-                    className="object-cover rounded-lg group-item mt-2 mb-4 hover:scale-110"
-                    style={{
-                      height: "300px",
-                      width: "230px",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
-              ))}
+            <div className="scroll-animation ">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 ">
+                {property.media.map((image) => (
+                  <div key={image.id} className="">
+                    <img
+                      src={image}
+                      alt=""
+                      className="object-cover rounded-lg group-item mt-2 mb-4 hover:scale-110"
+                      style={{
+                        height: "280px",
+                        width: "230px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </MyContext.Provider>
