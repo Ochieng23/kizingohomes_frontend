@@ -14,6 +14,7 @@ import AddCs from './Components/AddCs';
 import IndividualListing from './Components/IndividualListing';
 import ManageProperties from './Components/ManageProperties';
 import EditPropertyList from './Components/EditPropertyList';
+import Projects from './Components/Projects'
 function App() {
 
   const isAuthenticated = () => {
@@ -43,6 +44,7 @@ function App() {
     <Route path="/listing/:id" element={<IndividualListing />} />
     <Route path="/manageproperties" element={<ManageProperties />} />
     <Route path="/editproperties" element={<EditPropertyList />} />
+    <Route path="/projects" element={<Projects />} />
 
 
   </Routes>

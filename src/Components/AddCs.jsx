@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 
@@ -7,43 +6,54 @@ function AddCs() {
   const [constructionSite, setConstructionSite] = useState({
     name: "",
     description: "",
-    media: "",
+    architecturalDesign: [],
+    currentProgress: [],
     start_date: "",
     end_date: "",
     status: "",
   });
-  const [images, setImages] = useState([]);
 
   const cloudinaryUploadPreset = "hcdgzzgi";
   const cloudinaryCloudName = "dhz4c0oae";
 
-  const uploadImages = async () => {
-    const uploaders = images.map((file) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", cloudinaryUploadPreset);
-      formData.append("api_key", cloudinaryCloudName);
-
-      return axios
-        .post(
-          `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        )
-        .then((response) => {
-          const data = response.data;
-          const fileURL = data.secure_url;
-          return fileURL;
-        });
+  const deleteImage = (imageType, index) => {
+    setConstructionSite((prevConstructionSite) => {
+      const newImages = [...prevConstructionSite[imageType]];
+      newImages.splice(index, 1);
+      return { ...prevConstructionSite, [imageType]: newImages };
     });
+  };
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", cloudinaryUploadPreset);
+    formData.append("api_key", cloudinaryCloudName);
 
     try {
-      const imageUrls = await axios.all(uploaders);
-      setConstructionSite((prevProperty) => ({
-        ...prevProperty,
-        media: imageUrls,
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      const data = response.data;
+      const fileURL = data.secure_url;
+      return fileURL;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
+  };
+
+  const uploadImages = async (imageType, files) => {
+    const uploadPromises = files.map(uploadImage);
+    try {
+      const imageUrls = await Promise.all(uploadPromises);
+      setConstructionSite((prevConstructionSite) => ({
+        ...prevConstructionSite,
+        [imageType]: [...prevConstructionSite[imageType], ...imageUrls],
       }));
 
       console.log("Upload successful:", imageUrls);
@@ -53,26 +63,24 @@ function AddCs() {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setConstructionSite((prevConstructionSite) => ({
-      ...prevConstructionSite,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleUploadAndSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await uploadImages();
-
       const accessToken = localStorage.getItem("accessToken");
 
       if (!accessToken) {
         console.error("Access token not found in local storage.");
         return;
       }
+
+      await uploadImages(
+        "architecturalDesign",
+        constructionSite.architecturalDesign
+      );
+      await uploadImages("currentProgress", constructionSite.currentProgress);
+
+      console.log(constructionSite);
 
       const decodedToken = JSON.parse(atob(accessToken.split(".")[1]));
       const userCode = decodedToken.user_ref;
@@ -96,12 +104,12 @@ function AddCs() {
           setConstructionSite({
             name: "",
             description: "",
-            media: [],
+            architecturalDesign: [],
+            currentProgress: [],
             start_date: "",
             end_date: "",
             status: "",
           });
-          setImages([]);
         } else {
           console.error("Error creating property");
         }
@@ -113,15 +121,26 @@ function AddCs() {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setConstructionSite((prevConstructionSite) => ({
+      ...prevConstructionSite,
+      [name]: value,
+    }));
+  };
+
   const handleDrop = (acceptedFiles) => {
-    setImages(acceptedFiles);
+    uploadImages("architecturalDesign", acceptedFiles);
+  };
+
+  const handleDrop2 = (acceptedFiles) => {
+    uploadImages("currentProgress", acceptedFiles);
   };
 
   return (
     <div>
-      {" "}
       <div className="w-80 border border-teal-600 mx-auto py-8 p-4 my-2 rounded-lg">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleUploadAndSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700">
               Name
@@ -149,35 +168,71 @@ function AddCs() {
           </div>
           <div className="mb-4">
             <label htmlFor="media" className="block mb-2 font-bold">
-              Media
+              Architectural Design
             </label>
-            <Dropzone
-              onDrop={handleDrop}
-              multiple={true}
-              accept="image/*"
-              style={{
-                border: "1px dashed #ccc",
-                padding: "20px",
-                textAlign: "center",
-              }}
-            >
+            <Dropzone onDrop={handleDrop} accept="image/*" multiple={true}>
               {({ getRootProps, getInputProps }) => (
-                <div {...getRootProps()}>
+                <div
+                  {...getRootProps()}
+                  className="border border-gray-300 rounded p-4"
+                >
                   <input {...getInputProps()} />
-                  <p>Drop your files or click here to upload</p>
+                  <p>Drag and drop some files here, or click to select files</p>
                 </div>
               )}
             </Dropzone>
-            {images.length > 0 && (
-              <div className="mt-2">
-                <p>Selected Files:</p>
-                <ul>
-                  {images.map((file, index) => (
-                    <li key={index}>{file.name}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <div className="mt-4 bg-white">
+              {constructionSite.architecturalDesign.map((image, index) => (
+                <div key={index} className="flex items-center mb-2">
+                  <img
+                    src={image}
+                    alt="preview"
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => deleteImage("architecturalDesign", index)}
+                    className="ml-2 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="media" className="block mb-2 font-bold">
+              Current Progress
+            </label>
+            <Dropzone onDrop={handleDrop2} accept="image/*" multiple={true}>
+              {({ getRootProps, getInputProps }) => (
+                <div
+                  {...getRootProps()}
+                  className="border border-gray-300 rounded p-4"
+                >
+                  <input {...getInputProps()} />
+                  <p>Drag and drop some files here, or click to select files</p>
+                </div>
+              )}
+            </Dropzone>
+            <div className="mt-4 bg-white">
+              {constructionSite.currentProgress.map((image, index) => (
+                <div key={index} className="flex items-center mb-2">
+                  <img
+                    src={image}
+                    alt="preview"
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => deleteImage("currentProgress", index)}
+                    className="ml-2 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="mb-4">
             <label htmlFor="start_date" className="block text-gray-700">
