@@ -48,19 +48,19 @@ function AddCs() {
   };
 
   const uploadImages = async (imageType, files) => {
-    const uploadPromises = files.map(uploadImage);
-    try {
-      const imageUrls = await Promise.all(uploadPromises);
-      setConstructionSite((prevConstructionSite) => ({
-        ...prevConstructionSite,
-        [imageType]: [...prevConstructionSite[imageType], ...imageUrls],
-      }));
-
-      console.log("Upload successful:", imageUrls);
-      alert("Upload successful!");
-    } catch (error) {
-      console.error("Error uploading images:", error);
+    const imageUrls = [];
+    for (const file of files) {
+      const fileURL = await uploadImage(file);
+      imageUrls.push(fileURL);
     }
+
+    setConstructionSite((prevConstructionSite) => ({
+      ...prevConstructionSite,
+      [imageType]: [...prevConstructionSite[imageType], ...imageUrls],
+    }));
+
+    console.log("Upload successful:", imageUrls);
+    alert("Upload successful!");
   };
 
   const handleUploadAndSubmit = async (e) => {
@@ -81,9 +81,6 @@ function AddCs() {
       await uploadImages("currentProgress", constructionSite.currentProgress);
 
       console.log(constructionSite);
-
-      const decodedToken = JSON.parse(atob(accessToken.split(".")[1]));
-      const userCode = decodedToken.user_ref;
 
       try {
         const response = await fetch(
@@ -129,12 +126,8 @@ function AddCs() {
     }));
   };
 
-  const handleDrop = (acceptedFiles) => {
-    uploadImages("architecturalDesign", acceptedFiles);
-  };
-
-  const handleDrop2 = (acceptedFiles) => {
-    uploadImages("currentProgress", acceptedFiles);
+  const handleDrop = (acceptedFiles, imageType) => {
+    uploadImages(imageType, acceptedFiles);
   };
 
   return (
@@ -170,7 +163,13 @@ function AddCs() {
             <label htmlFor="media" className="block mb-2 font-bold">
               Architectural Design
             </label>
-            <Dropzone onDrop={handleDrop} accept="image/*" multiple={true}>
+            <Dropzone
+              onDrop={(acceptedFiles) =>
+                handleDrop(acceptedFiles, "architecturalDesign")
+              }
+              accept="image/*"
+              multiple={true}
+            >
               {({ getRootProps, getInputProps }) => (
                 <div
                   {...getRootProps()}
@@ -204,7 +203,13 @@ function AddCs() {
             <label htmlFor="media" className="block mb-2 font-bold">
               Current Progress
             </label>
-            <Dropzone onDrop={handleDrop2} accept="image/*" multiple={true}>
+            <Dropzone
+              onDrop={(acceptedFiles) =>
+                handleDrop(acceptedFiles, "currentProgress")
+              }
+              accept="image/*"
+              multiple={true}
+            >
               {({ getRootProps, getInputProps }) => (
                 <div
                   {...getRootProps()}
@@ -264,20 +269,26 @@ function AddCs() {
             <label htmlFor="status" className="block text-gray-700">
               Status
             </label>
-            <input
-              type="text"
+            <select
               id="status"
               name="status"
               value={constructionSite.status}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded py-2 px-4"
-            />
+            >
+              <option value="" disabled>
+                Select Status
+              </option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Delayed">Delayed</option>
+            </select>
           </div>
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Create Construction Site
+            Submit
           </button>
         </form>
       </div>
