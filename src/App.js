@@ -15,6 +15,7 @@ import IndividualListing from './Components/IndividualListing';
 import ManageProperties from './Components/ManageProperties';
 import EditPropertyList from './Components/EditPropertyList';
 import Projects from './Components/Projects'
+import ProjectPage from './Components/ProjectPage';
 function App() {
 
   const isAuthenticated = () => {
@@ -45,7 +46,7 @@ function App() {
     <Route path="/manageproperties" element={<ManageProperties />} />
     <Route path="/editproperties" element={<EditPropertyList />} />
     <Route path="/projects" element={<Projects />} />
-
+    <Route path="/project/:id" element={<ProjectPage />} />
 
   </Routes>
 
