@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Carousel() {
   const images = [
     {
-      url: "https://images.unsplash.com/photo-1646844371945-808c9d3191a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80",
+      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687353292/pngwbv1ofzl69g2moph7.avif",
       text: "Vipingo Heights",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
@@ -56,7 +56,7 @@ function Carousel() {
           >
             <img
               src={imageUrl.url}
-              className="filter  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
+              className="filter sm:w-aspect-1 h-aspect-1 md:w-aspect-1 h-aspect-1  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
               alt="..."
             />
 
