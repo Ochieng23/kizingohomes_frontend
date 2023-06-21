@@ -10,12 +10,12 @@ function Carousel() {
       description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
-      url: "https://images.unsplash.com/photo-1605276373954-0c4a0dac5b12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687357100/bb5migtpqg2jw4br5x49.avif",
       text: "Nyali Beach Apartments",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
-      url: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687357238/h1coppxt8cnnagwgbces.avif",
       text: "Diani Cottages",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
@@ -61,7 +61,7 @@ function Carousel() {
             />
 
             {/* Overlay text */}
-            <div className="absolute bottom-0 left-0 right-0 py-2 px-4 bg-teal-500 bg-opacity-50 text-dark shadow-md flex">
+            <div className="w-full sm:w-auto mb-1 sm:mb-0 sm:mr-0 sm:text- absolute bottom-0 left-0 right-0 py-2 px-4 bg-teal-500 bg-opacity-50 text-dark shadow-md flex">
               <div className="flex-start">
                 <strong className="text-bold text-black">
                   {imageUrl.text}
@@ -73,7 +73,7 @@ function Carousel() {
                 </strong>
               </div>
               <div className="flex-end">
-                <Link className="text-sm inline-block  px-4 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mt-4 mr-2 lg:mt-0 ">
+                <Link className="text-sm  inline-block  px-4 py-2 leading-none border rounded text-dark border-dark hover:border-transparent hover:text-dark-500 hover:bg-white mb-2 mr-2 lg:mt-0 ">
                   <strong>View</strong>
                 </Link>
               </div>

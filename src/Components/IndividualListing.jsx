@@ -62,10 +62,10 @@ const IndividualListing = () => {
               </p>
             </div>
           </div>
-          <div className="bg-gray-200 h-100">
+          <div className="bg-gray-200 h-100 m-3">
             <h5 className="text-2xl font-bold mb-4">Gallery</h5>
             <div className="scroll-animation ">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 ">
+              <div className="grid grid-cols-3 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 ">
                 {property.media.map((image) => (
                   <div key={image.id} className="">
                     <img
