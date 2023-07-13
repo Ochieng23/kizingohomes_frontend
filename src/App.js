@@ -16,6 +16,8 @@ import ManageProperties from './Components/ManageProperties';
 import EditPropertyList from './Components/EditPropertyList';
 import Projects from './Components/Projects'
 import ProjectPage from './Components/ProjectPage';
+import AddStaff from './Components/AddStaff';
+import AssignWork from './Components/AssignWork';
 function App() {
 
   const isAuthenticated = () => {
@@ -47,6 +49,8 @@ function App() {
     <Route path="/editproperties" element={<EditPropertyList />} />
     <Route path="/projects" element={<Projects />} />
     <Route path="/project/:id" element={<ProjectPage />} />
+    <Route path="/addstaff" element={<AddStaff />} />
+    <Route path="/assignwork" element={<AssignWork />} />
 
   </Routes>
 

@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 function Carousel() {
   const images = [
     {
-      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687353292/pngwbv1ofzl69g2moph7.avif",
+      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687255205/rssrbcpyqc3e9wh4uysg.avif",
       text: "Vipingo Heights",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
-      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687357100/bb5migtpqg2jw4br5x49.avif",
+      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687255205/rssrbcpyqc3e9wh4uysg.avif",
       text: "Nyali Beach Apartments",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
     {
-      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687357238/h1coppxt8cnnagwgbces.avif",
+      url: "https://res.cloudinary.com/dhz4c0oae/image/upload/v1687255205/rssrbcpyqc3e9wh4uysg.avif",
       text: "Diani Cottages",
       description: " Luxury two bedroom apartments starting from $200,000",
     },
@@ -44,7 +44,10 @@ function Carousel() {
       data-carousel="static"
     >
       {/* Carousel wrapper */}
-      <div className="relative h-56 overflow-hidden rounded-none md:h-96">
+      <div
+        className="relative h-96 overflow-hidden rounded-none md:h-96"
+        style={{ border: "", height: "450px" }}
+      >
         {/* Carousel items */}
         {images.map((imageUrl, index) => (
           <div
@@ -56,7 +59,7 @@ function Carousel() {
           >
             <img
               src={imageUrl.url}
-              className="filter sm:w-aspect-1 h-aspect-1 md:w-aspect-1 h-aspect-1  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
+              className="filter sm:w-aspect-1 h-100 md:w-full h-auto  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-100 object-cover"
               alt="..."
             />
 

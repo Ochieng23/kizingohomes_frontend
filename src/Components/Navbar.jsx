@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 function Navbar() {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
       <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -25,7 +31,10 @@ function Navbar() {
           </span>
         </Link>
         <div className="block lg:hidden">
-          <button className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+          <button
+            className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+            onClick={toggleMenu}
+          >
             <svg
               className="fill-current h-3 w-3"
               viewBox="0 0 20 20"
@@ -36,7 +45,11 @@ function Navbar() {
             </svg>
           </button>
         </div>
-        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div
+          className={`${
+            isMenuOpen ? "" : "hidden"
+          } w-full block flex-grow lg:flex lg:items-center lg:w-auto`}
+        >
           <div className="text-sm lg:flex-grow">
             <Link
               to="/"
@@ -45,13 +58,13 @@ function Navbar() {
               <strong>Buy</strong>
             </Link>
             <Link
-              href="#responsive-header"
+              to="#responsive-header"
               className="block mt-4 lg:inline-block lg:mt-0 text-black-300 hover:text-white mr-4"
             >
               <strong>Rent</strong>
             </Link>
             <Link
-              href="#responsive-header"
+              to="#responsive-header"
               className="block mt-4 lg:inline-block lg:mt-0 text-black-300 hover:text-white"
             >
               <strong>Sell</strong>
@@ -65,7 +78,7 @@ function Navbar() {
               LOGIN
             </Link>
             <Link
-              href="#"
+              to="#"
               className="inline-block text-sm px-4 py-2 leading-none border rounded text-black-300 border-white hover:border-transparent hover:text-white-500 hover:bg-white mt-4 lg:mt-0"
             >
               CONTACT

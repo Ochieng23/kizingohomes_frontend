@@ -51,9 +51,9 @@ function ManageProperties() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto overflow-x-auto">
       <h1 className="text-3xl font-bold mb-6">Manage Properties</h1>
-      <table className="table-auto w-full">
+      <table className="table-auto min-w-full divide-y">
         <thead>
           <tr>
             <th className="px-4 py-2">Name</th>

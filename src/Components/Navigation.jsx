@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import { Link } from "react-router-dom";
+import { BsCaretDown } from "react-icons/bs";
+import { FaBars } from "react-icons/fa";
 
 function Navigation() {
   const [showList, setShowList] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   const toggleList = () => {
     setShowList(!showList);
+  };
+
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
   };
 
   const handleLogout = () => {
@@ -36,18 +44,26 @@ function Navigation() {
               <strong>P</strong>roperties
             </span>
           </Link>
-          <div className=" flex items-end md:order-4">
-            <button
-              type="button"
-              className="block h-8 w-8 rounded-full overflow-hidden focus:outline-none focus:border-white border-2 border-gray-600"
-              onClick={toggleList}
-            >
+          <div className="flex items-end md:order-4">
+            <div className="block h-8 w-8 rounded-full overflow-hidden focus:outline-none focus:border-white border-2 border-gray-600">
               <img
                 className="h-full w-full object-cover transform scale-100 "
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
                 alt="avatar"
               />
+            </div>
+            <button type="button" className="" onClick={toggleList}>
+              <BsCaretDown
+                className="caret-icon"
+                style={{
+                  fill: "black",
+                  marginLeft: "2px",
+                  marginTop: "2px",
+                  marginBottom: "6px",
+                }}
+              />
             </button>
+
             {/* Dropdown menu */}
             {showList && (
               <div className="fixed top-10 right-0  absolute z-50 w-48 py-2 shadow-xl mt-2 bg-white rounded-lg">
@@ -91,28 +107,20 @@ function Navigation() {
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
-              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex  items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="mobile-menu-2"
               aria-expanded="false"
+              onClick={toggleMobileMenu}
             >
               <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
+
+              <FaBars className="h-4 w-4" />
             </button>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className={`items-center justify-between ${
+              showMobileMenu ? "" : "hidden"
+            } w-full md:flex md:w-auto md:order-1`}
             id="mobile-menu-2"
           >
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-teal-100 rounded-lg bg-teal-600 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white md:dark:bg-teal-600">
